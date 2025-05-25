@@ -1,0 +1,290 @@
+:root {
+  --primary-color: #4CAF50;
+  --primary-hover: #45a049;
+  --secondary-color: #2196F3;
+  --secondary-hover: #0b7dda;
+  --warning-color: #FF9800;
+  --warning-hover: #e68a00;
+  --danger-color: #f44336;
+  --danger-hover: #da190b;
+  --light-bg: #f5f5f5;
+  --card-bg: #ffffff;
+  --text-color: #333333;
+  --border-color: #dddddd;
+  --shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  font-family: "WDXL Lubrifont TC", sans-serif;
+  background-color: var(--light-bg);
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+}
+
+.container-wrapper {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.scorebar {
+  background: rgba(255, 224, 224, 0.705);
+  width: 250px;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  padding: 2rem;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  background: var(--card-bg);
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+}
+
+.score-reset-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+h1 {
+  color: var(--text-color);
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+}
+
+/* Form Stilleri */
+.task-form {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.task-form input, 
+.task-form select {
+  padding: 0.75rem;
+  flex: 1;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: var(--transition);
+}
+
+.task-form input:focus, 
+.task-form select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+
+.task-form button {
+  padding: 0.75rem 1.25rem;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+
+.task-form button:hover {
+  background: var(--primary-hover);
+  transform: translateY(-1px);
+}
+
+/* Görev Listesi */
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.task-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  background: #f9f9f9;
+  transition: var(--transition);
+}
+
+.task-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 3px 5px rgba(0,0,0,0.1);
+}
+
+.task-item.active {
+  animation: pulse 1.5s infinite;
+  border-color: var(--primary-color);
+  background: #e8f5e9;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(76, 175, 80, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0); }
+}
+
+.task-content {
+  flex: 1;
+  padding-right: 1rem;
+  word-break: break-word;
+}
+
+.task-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.task-actions button {
+  padding: 0.5rem 0.75rem;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.task-actions button:hover {
+  transform: translateY(-1px);
+}
+
+.start-btn { 
+  background: var(--secondary-color); 
+  color: white; 
+}
+.start-btn:hover { background: var(--secondary-hover); }
+
+.finish-btn { 
+  background: var(--warning-color); 
+  color: white; 
+}
+.finish-btn:hover { background: var(--warning-hover); }
+
+.delete-btn { 
+  background: var(--danger-color); 
+  color: white; 
+}
+.delete-btn:hover { background: var(--danger-hover); }
+
+#reset-button {
+  background: var(--danger-color);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.25rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: var(--transition);
+}
+
+#reset-button:hover {
+  background: var(--danger-hover);
+  transform: translateY(-1px);
+}
+
+/* Responsive Tasarım */
+@media (max-width: 768px) {
+  .container-wrapper {
+    flex-direction: column;
+  }
+  
+  .scorebar {
+    width: 100%;
+    height: auto;
+    position: static;
+    padding: 1.5rem;
+  }
+  
+  .task-form {
+    flex-wrap: wrap;
+  }
+  
+  .task-form input,
+  .task-form select,
+  .task-form button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 1rem;
+  }
+  
+  .task-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  
+  .task-actions {
+    align-self: flex-end;
+  }
+}
+
+/* Erişilebilirlik İyileştirmeleri */
+button:focus, input:focus, select:focus {
+  outline: 2px solid var(--secondary-color);
+  outline-offset: 2px;
+}
+
+[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* Scrollbar Stili */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

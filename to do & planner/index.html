@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do & Planner</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=WDXL+Lubrifont+TC&display=swap" rel="stylesheet">
+</head>
+<body>
+   <div class="container-wrapper">
+
+       <div class="container"> 
+           <h1>Todo App</h1>
+           <!-- Görev ekleme alanı -->
+           <div class="task-form">
+               <input 
+               type="text" 
+               id="taskInput" 
+               placeholder="Bir Görev Giriniz"
+               onkeypress="if(event.key=='Enter') addTask()"
+               >
+               <select id="difficulty">
+                   <option value="Kolay">Kolay</option>
+                   <option value="Orta">Orta</option>
+                   <option value="Zor">Zor</option>
+                </select>
+                <button onclick="addTask()">Görev Ekle</button>
+            </div>
+            <!-- Görev Listesi -->
+            <div class="task-list" id="taskList">
+                <!-- Görevler JavaScript ile buraya eklenecek -->
+            </div>
+        </div>
+        <div class="scorebar">
+        <div class="score-reset-wrapper">
+            <h2>Toplanan Puan: <span id="score">0</span></h2>
+            <button id="reset-button" onclick="resetScore()">Puanı Sıfırla</button>
+        </div>
+        </div>
+
+        
+        
+
+    </div>
+        
+    <script src="main.js"></script>
+</body>
+</html>
