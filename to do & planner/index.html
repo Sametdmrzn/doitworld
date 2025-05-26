@@ -1,51 +1,171 @@
 <!DOCTYPE html>
 <html lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
     <title>To Do & Planner</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=WDXL+Lubrifont+TC&display=swap" rel="stylesheet">
-</head>
-<body>
-   <div class="container-wrapper">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-container">
+      <!-- Sol Panel - Todo Listesi -->
+      <div class="left-panel">
+        <button class="close-panel" onclick="closePanel('left')">
+          &times;
+        </button>
+        <div class="todo-header">
+          <h2><i class="fas fa-list-check"></i> Todo Listem</h2>
+        </div>
+        <div class="todo-list" id="todoList">
+          <!-- Todo öğeleri buraya eklenecek -->
+        </div>
+      </div>
 
-       <div class="container"> 
-           <h1>Todo App</h1>
-           <!-- Görev ekleme alanı -->
-           <div class="task-form">
-               <input 
-               type="text" 
-               id="taskInput" 
-               placeholder="Bir Görev Giriniz"
-               onkeypress="if(event.key=='Enter') addTask()"
-               >
-               <select id="difficulty">
-                   <option value="Kolay">Kolay</option>
-                   <option value="Orta">Orta</option>
-                   <option value="Zor">Zor</option>
-                </select>
-                <button onclick="addTask()">Görev Ekle</button>
+      <!-- Orta Panel - Ana İçerik -->
+      <div class="main-content">
+        <div class="container">
+          <h1>Todo App</h1>
+          <!-- Görev ekleme alanı -->
+          <div class="task-form">
+            <input
+              type="text"
+              id="taskInput"
+              placeholder="Bir Görev Giriniz"
+              onkeypress="if(event.key=='Enter') addTask()"
+            />
+            <select id="difficulty">
+              <option value="Kolay">Kolay</option>
+              <option value="Orta">Orta</option>
+              <option value="Zor">Zor</option>
+            </select>
+            <button onclick="addTask()">Görev Ekle</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sağ Panel - Evcil Hayvan -->
+      <div class="right-panel">
+        <button class="close-panel" onclick="closePanel('right')">
+          &times;
+        </button>
+        <div class="pet-menu">
+          <div class="pet-tabs">
+            <div
+              class="pet-tab active"
+              onclick="openPetTab(event, 'pet-status')"
+            >
+              <i class="fas fa-paw"></i> Durum
             </div>
-            <!-- Görev Listesi -->
-            <div class="task-list" id="taskList">
-                <!-- Görevler JavaScript ile buraya eklenecek -->
+            <div class="pet-tab" onclick="openPetTab(event, 'pet-shop')">
+              <i class="fas fa-shopping-cart"></i> Dükkan
             </div>
-        </div>
-        <div class="scorebar">
-        <div class="score-reset-wrapper">
-            <h2>Toplanan Puan: <span id="score">0</span></h2>
-            <button id="reset-button" onclick="resetScore()">Puanı Sıfırla</button>
-        </div>
-        </div>
+            <div class="pet-tab" onclick="openPetTab(event, 'pet-inventory')">
+              <i class="fas fa-box-open"></i> Envanter
+            </div>
+          </div>
 
-        
-        
+          <!-- Pet Status Tab -->
+          <div id="pet-status" class="pet-tab-content active">
+            <div class="pet-header">
+              <h3>Evcil Hayvanım</h3>
+            </div>
+            <div class="pet-container">
+              <div class="pet-display" id="petDisplay">
+                <img
+                  src="https://cdn-icons-png.flaticon.com/512/616/616408.png"
+                  alt="Evcil Hayvan"
+                  class="pet-image"
+                  id="currentPetImage"
+                />
+              </div>
+              <div class="pet-controls">
+                <button class="pet-btn feed-btn" onclick="feedPet()">
+                  <i class="fas fa-utensils"></i> Besle
+                </button>
+                <button class="pet-btn play-btn" onclick="playWithPet()">
+                  <i class="fas fa-gamepad"></i> Oyna
+                </button>
+                <button class="pet-btn clean-btn" onclick="cleanPet()">
+                  <i class="fas fa-bath"></i> Temizle
+                </button>
+              </div>
+              <div class="pet-stats">
+                <div class="stat-bar">
+                  <label>Açlık:</label>
+                  <progress id="hunger-bar" value="70" max="100"></progress>
+                </div>
+                <div class="stat-bar">
+                  <label>Mutluluk:</label>
+                  <progress id="happiness-bar" value="50" max="100"></progress>
+                </div>
+                <div class="stat-bar">
+                  <label>Temizlik:</label>
+                  <progress
+                    id="cleanliness-bar"
+                    value="80"
+                    max="100"
+                  ></progress>
+                </div>
+              </div>
+            </div>
+            <div class="score-reset-wrapper">
+              <h3>Toplanan Puan: <span id="score">0</span></h3>
+              <button id="reset-button" onclick="resetScore()">
+                Puanı Sıfırla
+              </button>
+            </div>
+          </div>
 
+          <!-- Pet Shop Tab -->
+          <div id="pet-shop" class="pet-tab-content">
+            <div class="pet-header">
+              <h3>Evcil Hayvan Dükkanı</h3>
+              <p>
+                Tamamladığınız görevlerle kazandığınız puanlarla yeni evcil
+                hayvanlar satın alabilirsiniz!
+              </p>
+            </div>
+            <div class="pet-shop" id="petShop">
+              <!-- Pet shop items will be loaded here -->
+            </div>
+          </div>
+
+          <!-- Pet Inventory Tab -->
+          <div id="pet-inventory" class="pet-tab-content">
+            <div class="pet-header">
+              <h3>Evcil Hayvan Envanteri</h3>
+              <p>Sahip olduğunuz evcil hayvanlar:</p>
+            </div>
+            <div class="pet-inventory" id="petInventory">
+              <!-- Owned pets will be displayed here -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobil menü -->
+      <div class="mobile-menu">
+        <div class="mobile-menu-btn" onclick="togglePanel('left')">
+          <i class="fas fa-list-check"></i>
+          <span>Görevler</span>
+        </div>
+        <div class="mobile-menu-btn" onclick="togglePanel('right')">
+          <i class="fas fa-paw"></i>
+          <span>Evcil Hayvan</span>
+        </div>
+      </div>
+
+      <!-- Panel overlay -->
+      <div class="panel-overlay" onclick="closeAllPanels()"></div>
     </div>
-        
+
     <script src="main.js"></script>
-</body>
+  </body>
 </html>
